@@ -1,12 +1,11 @@
 package imd0412.parkinglot.calculator;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Arrays;
 import java.util.Collection;
 
-import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
@@ -14,10 +13,9 @@ import org.junit.runners.Parameterized.Parameters;
 
 import imd0412.parkinglot.ParkingLotType;
 
+
 @RunWith(Parameterized.class)
-public class CalculatorTest {
-	
-	private static Calculator calculator;
+public class CalculatorTestExceptional {
 	
 	@Parameter(0)
 	public String checkin;
@@ -29,36 +27,31 @@ public class CalculatorTest {
 	public ParkingLotType type; 
 	
 	@Parameter(3)
-	public Float expectedParkingCost;
+	public Class<? extends Throwable> exception;
 
-	@Parameter(4)
-	public String nameTestCase;
+	@Parameters(name = "testShouldReturn")
+	public static Collection<Object[]> buildData() {
+		return Arrays.asList(new Object[][] {
+				// TODO
+		});
+	}
+
+	@Rule
+	public ExpectedException exceptionalExpectation = ExpectedException.none();
 	
-	
-	@BeforeClass
-	public static void setUp() {
+	@Test
+	public void testShouldCalculaterParkingCostExceptional() {
 		
 		/// Configuração
 		
-		calculator = new Calculator();
-	}
-	
-	@Parameters(name = "testShouldReturn-{3}_{4}")
-	public static Collection<Object[]> buildData() {
-		return Arrays.asList(new Object[][] {
-				// TODO 
-			});
-	}
-	
-	@Test
-	public void testShouldCalculaterParkingCost() {
+		exceptionalExpectation.expect(exception);
+		Calculator calculator = new Calculator();
 		
 		/// Ação
 		
-		Float producedParkingCost = calculator.calculateParkingCost(checkin, checkout, type); 
-
+		Float parkingCost = calculator.calculateParkingCost(checkin, checkout, type); 
+		
 		/// Verificação
-
-		assertEquals(expectedParkingCost, producedParkingCost);
+		
 	}
 }

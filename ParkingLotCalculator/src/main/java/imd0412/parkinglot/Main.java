@@ -4,15 +4,12 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-public class Main
-{
-	public static void main(String[] args)
-	{
+public class Main {
+	public static void main(String[] args) {
 		final String checkin = "2016.04.08 12:30";
 		final String checkout = "2017.04.08 14:35";
 
-		try
-		{
+		try {
 			// Transformar de String para objeto data
 			LocalDateTime checkinTime = LocalDateTime.parse(checkin, Constants.DATE_FORMATTER);
 			LocalDateTime checkoutTime = LocalDateTime.parse(checkout, Constants.DATE_FORMATTER);
@@ -35,20 +32,18 @@ public class Main
 			long minutes = duration.toMinutes();
 			System.out.printf("Permanência de: %d dias, ou %d horas, ou %d minutos.\n", days, hours, minutes);
 		}
-		catch (DateTimeParseException exc)
-		{
+		catch (DateTimeParseException exc) {
 			System.err.printf("%s is not parsable!%n", checkin);
 			throw exc;
 		}
 
 		// Exemplo de como identificar inputs fora do padrão
 		final String incorrectInput = "2011/10/09 11h20min";
-		try
-		{
+		
+		try {
 			LocalDateTime.parse(incorrectInput, Constants.DATE_FORMATTER);
 		}
-		catch (DateTimeParseException exc)
-		{
+		catch (DateTimeParseException exc) {
 			System.err.printf("%s is not parsable!%n", incorrectInput);
 			throw exc;
 		}
