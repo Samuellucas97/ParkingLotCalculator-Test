@@ -5,6 +5,7 @@ import imd0412.parkinglot.ParkingLotType;
 import imd0412.parkinglot.exception.DateFormatException;
 import imd0412.parkinglot.exception.InvalidDataException;
 
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -38,45 +39,45 @@ public class CalculatorTestExceptional {
 	public static Collection<Object[]> buildData() {
 		return Arrays.asList(new Object[][] {
 
-		{ "2017.11.31 10:30M", "2018.11.31 10:30", ParkingLotType.ShortTerm, DateFormatException.class, "Regra 1" },
+		{ "2017.11.30 10:30M", "2018.11.30 10:30", ParkingLotType.ShortTerm, DateFormatException.class, "Regra 1" },
 
-		{ "2017.11.31 10:30", "2018.11.31 10:30M", ParkingLotType.ShortTerm, DateFormatException.class, "Regra 2" },
+		{ "2017.11.30 10:30", "2018.11.30 10:30M", ParkingLotType.ShortTerm, DateFormatException.class, "Regra 2" },
 
-		{ "2017.11.36 10:30", "2018.11.31 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 3" },
+		{ "2017.11.36 10:30", "2018.11.30 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 3" },
 
-		{ "2017.13.31 10:30", "2018.11.31 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 4" },
+		{ "2017.13.30 10:30", "2018.11.30 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 4" },
 
-		{ "2019.11.31 10:30", "2018.11.31 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 5" },
+		{ "2019.11.30 10:30", "2018.11.30 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 5" },
 
-		{ "1968.11.31 10:30", "2018.11.31 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 6" },
+		{ "1968.11.30 10:30", "2018.11.30 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 6" },
 
-		{ "2017.11.31 24:30", "2018.11.31 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 7" },
+		{ "2017.11.30 24:30", "2018.11.30 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 7" },
 
-		{ "2017.11.31 10:60", "2018.11.31 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 8" },
+		{ "2017.11.30 10:60", "2018.11.30 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 8" },
 
-		{ "2017.11.31 10:30", "2018.11.36 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 9" },
+		{ "2017.11.30 10:30", "2018.11.36 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 9" },
 
-		{ "2017.11.31 10:30", "2018.13.31 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 10" },
+		{ "2017.11.30 10:30", "2018.13.30 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 10" },
 
-		{ "2017.11.31 10:30", "2020.11.31 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 11" },
+		{ "2017.11.30 10:30", "2020.11.30 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 11" },
 
-		{ "2017.11.31 10:30", "1968.11.31 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 12" },
+		{ "2017.11.30 10:30", "1968.11.30 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 12" },
 
-		{ "2017.11.31 10:30", "2018.11.31 24:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 13" },
+		{ "2017.11.30 10:30", "2018.11.30 24:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 13" },
 
-		{ "2017.11.31 10:30", "2018.11.31 10:60", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 14" },
+		{ "2017.11.30 10:30", "2018.11.30 10:60", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 14" },
 
-		{ "2015.11.31 10:30", "2016.02.30 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 15" },
+		{ "2015.11.30 10:30", "2016.02.30 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 15" },
 
-		{ "2016.11.31 10:30", "2017.02.30 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 16" },
+		{ "2016.11.30 10:30", "2017.02.30 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 16" },
 
-		{ "2016.02.30 10:30", "2017.11.31 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 17" },
+		{ "2016.02.30 10:30", "2017.11.30 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 17" },
 
-		{ "2017.02.30 10:30", "2018.11.31 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 18" },
+		{ "2017.02.30 10:30", "2018.11.30 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 18" },
 
-		{ "2017.06.31 10:30", "2018.11.31 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 19" },
+		{ "2017.06.31 10:30", "2018.11.30 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 19" },
 
-		{ "2017.11.31 10:30", "2018.06.31 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 20" },
+		{ "2017.11.30 10:30", "2018.06.31 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 20" },
 
 		{ "2018.11.10 10:30", "2017.11.10 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 21" }
 
@@ -87,7 +88,8 @@ public class CalculatorTestExceptional {
 	public ExpectedException exceptionalExpectation = ExpectedException.none();
 
 	@Test
-	public void testShouldCalculaterParkingCostExceptional() throws DateFormatException, InvalidDataException {
+	public void testShouldCalculaterParkingCostExceptional() throws DateFormatException, InvalidDataException,
+			ParseException {
 
 		// / Configuração
 		exceptionalExpectation.expect(exception);

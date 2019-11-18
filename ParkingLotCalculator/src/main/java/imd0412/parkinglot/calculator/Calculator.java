@@ -5,6 +5,10 @@ import imd0412.parkinglot.exception.DateFormatException;
 import imd0412.parkinglot.exception.InvalidDataException;
 import imd0412.parkinglot.exception.InvalidDataType;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Calculator {
 	/**
 	 * Calculates the staying cost in the parking lot.
@@ -19,9 +23,12 @@ public class Calculator {
 	 * @return
 	 * @throws DateFormatException
 	 * @throws InvalidDataException
+	 * @throws ParseException
 	 */
 	Float calculateParkingCost(String checkin, String checkout, ParkingLotType type) throws DateFormatException,
-			InvalidDataException {
+			InvalidDataException, ParseException {
+
+		float result = 0;
 
 		checkingDateFormat(checkin);
 
@@ -29,15 +36,46 @@ public class Calculator {
 
 		checkingInvalidData(checkin, checkout);
 
-		return null;
+		int checkinCheckoutDifference = calculateCheckinCheckoutDifferenceInHours(checkin, checkout);
+
+		if (type == ParkingLotType.VIP) {
+			result = calculateVIP(checkinCheckoutDifference);
+		}
+
+		return result;
 	}
 
-	private void checkingDateFormatCheckinCheckout(String checkin, String checkout) throws DateFormatException {
+	private float calculateVIP(int checkinCheckoutDifference) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-		checkingDateFormat(checkin);
+	private int calculateCheckinCheckoutDifferenceInHours(String checkin, String checkout) throws ParseException {
+		int anoCheckin = Integer.parseInt(checkin.substring(0, 4));
+		int mesCheckin = Integer.parseInt(checkin.substring(5, 7));
+		int diaCheckin = Integer.parseInt(checkin.substring(8, 10));
+		int horaCheckin = Integer.parseInt(checkin.substring(11, 13));
+		int minutoCheckin = Integer.parseInt(checkin.substring(14, 16));
 
-		checkingDateFormat(checkout);
+		int anoCheckout = Integer.parseInt(checkout.substring(0, 4));
+		int mesCheckout = Integer.parseInt(checkout.substring(5, 7));
+		int diaCheckout = Integer.parseInt(checkout.substring(8, 10));
+		int horaCheckout = Integer.parseInt(checkout.substring(11, 13));
+		int minutoCheckout = Integer.parseInt(checkout.substring(14, 16));
+		SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		String checkindate = diaCheckin + "/" + mesCheckin + "/" + anoCheckin + " " + horaCheckin + ":" + minutoCheckin;
+		Date parsedcheckin = fmt.parse(checkindate);
+		String checkoutdate = diaCheckout + "/" + mesCheckout + "/" + anoCheckout + " " + horaCheckout + ":"
+				+ minutoCheckout;
+		Date parsedcheckout = fmt.parse(checkoutdate);
 
+		long diff = parsedcheckout.getTime() - parsedcheckin.getTime();
+		long diffMinutes = diff / (60 * 1000) % 60;
+		long diffHours = (diffMinutes / 60);
+		if ((diffMinutes % 60) > 0) {
+			diffHours++;
+		}
+		return (int) diffHours;
 	}
 
 	private void checkingDateFormat(String checkin_checkout) throws DateFormatException {

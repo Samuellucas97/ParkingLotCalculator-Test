@@ -5,6 +5,7 @@ import imd0412.parkinglot.ParkingLotType;
 import imd0412.parkinglot.exception.DateFormatException;
 import imd0412.parkinglot.exception.InvalidDataException;
 
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -47,11 +48,11 @@ public class CalculatorTest {
 	public static Collection<Object[]> buildData() {
 		return Arrays.asList(new Object[][] {
 
-		{ "2017.11.31 10:30", "2017.11.31 11:00", ParkingLotType.ShortTerm, 8, "Regra 22" },
-				{ "2017.11.31 09:30", "2017.11.31 11:00", ParkingLotType.ShortTerm, 10, "Regra 23" },
+		{ "2017.11.30 10:30", "2017.11.30 11:00", ParkingLotType.ShortTerm, 8, "Regra 22" },
+				{ "2017.11.30 09:30", "2017.11.30 11:00", ParkingLotType.ShortTerm, 10, "Regra 23" },
 				{ "2017.11.25 09:30", "2017.11.29 11:00", ParkingLotType.ShortTerm, 402, "Regra 24" },
 				{ "2017.11.20 09:30", "2017.11.29 11:00", ParkingLotType.ShortTerm, 852, "Regra 25" },
-				{ "2017.11.31 10:30", "2017.11.31 11:30", ParkingLotType.LongTerm, 70, "Regra 26" },
+				{ "2017.11.30 10:30", "2017.11.30 11:30", ParkingLotType.LongTerm, 70, "Regra 26" },
 				{ "2017.11.25 09:30", "2017.11.29 11:00", ParkingLotType.LongTerm, 220, "Regra 27" },
 				{ "2017.11.20 09:30", "2017.11.29 11:00", ParkingLotType.LongTerm, 430, "Regra 28" },
 				{ "2017.11.20 09:30", "2017.12.26 11:00", ParkingLotType.LongTerm, 1550, "Regra 29" },
@@ -63,7 +64,7 @@ public class CalculatorTest {
 	}
 
 	@Test
-	public void testShouldCalculateParkingCost() throws DateFormatException, InvalidDataException {
+	public void testShouldCalculateParkingCost() throws DateFormatException, InvalidDataException, ParseException {
 
 		// / Ação
 
