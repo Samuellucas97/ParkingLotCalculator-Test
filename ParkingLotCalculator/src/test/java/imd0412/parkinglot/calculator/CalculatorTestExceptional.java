@@ -78,7 +78,7 @@ public class CalculatorTestExceptional {
 
 		{ "2017.11.31 10:30", "2018.06.31 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 20" },
 
-		{ "2018.11.31 10:30", "2017.11.31 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 21" }
+		{ "2018.11.10 10:30", "2017.11.10 10:30", ParkingLotType.ShortTerm, InvalidDataException.class, "Regra 21" }
 
 		});
 	}

@@ -94,6 +94,54 @@ public class Calculator {
 		checkMinutoCheckinCheckout(minutoCheckin);
 		checkMinutoCheckinCheckout(minutoCheckout);
 
+		checkLeapYearFebruaryDays(anoCheckin, mesCheckin, diaCheckin);
+		checkLeapYearFebruaryDays(anoCheckout, mesCheckout, diaCheckout);
+
+		check30DaysMonth(mesCheckin, diaCheckin);
+		check30DaysMonth(mesCheckout, diaCheckout);
+
+		checkCheckinBiggerThanCheckout(anoCheckin, mesCheckin, diaCheckin, horaCheckin, minutoCheckin, anoCheckout,
+				mesCheckout, diaCheckout, horaCheckout, minutoCheckout);
+	}
+
+	private void checkCheckinBiggerThanCheckout(int anoCheckin, int mesCheckin, int diaCheckin, int horaCheckin,
+			int minCheckin, int anoCheckout, int mesCheckout, int diaCheckout, int horaCheckout, int minCheckout)
+			throws InvalidDataException {
+		if (anoCheckin > anoCheckout) {
+			throw new InvalidDataException(InvalidDataType.CheckinBiggerThanCheckout);
+		} else if (anoCheckin == anoCheckout) {
+			if (mesCheckin > mesCheckout) {
+				throw new InvalidDataException(InvalidDataType.CheckinBiggerThanCheckout);
+			} else if (mesCheckin == mesCheckout) {
+				if (diaCheckin > diaCheckout) {
+					throw new InvalidDataException(InvalidDataType.CheckinBiggerThanCheckout);
+				} else if (diaCheckin == diaCheckout) {
+					if (horaCheckin > horaCheckout) {
+						throw new InvalidDataException(InvalidDataType.CheckinBiggerThanCheckout);
+					} else if (horaCheckin == horaCheckout) {
+						if (minCheckin > minCheckout) {
+							throw new InvalidDataException(InvalidDataType.CheckinBiggerThanCheckout);
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+	private void check30DaysMonth(int mes, int dia) throws InvalidDataException {
+		if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && (dia > 30)) {
+			throw new InvalidDataException(InvalidDataType.NonexistentDate);
+		}
+
+	}
+
+	private void checkLeapYearFebruaryDays(int ano, int mes, int dia) throws InvalidDataException {
+		if ((ano % 4 == 0) && (mes == 2) && (dia > 29)) {
+			throw new InvalidDataException(InvalidDataType.NonexistentDate);
+		} else if (!(ano % 4 == 0) && (mes == 2) && (dia > 28)) {
+			throw new InvalidDataException(InvalidDataType.NonexistentDate);
+		}
 	}
 
 	private void checkAnoCheckin(int anoCheckin) throws InvalidDataException {
