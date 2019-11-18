@@ -54,12 +54,14 @@ public class Calculator {
 	}
 	
 	private float calculateLongoPrazo(int checkinCheckoutDifference) {
-		if ( checkinCheckoutDifference <= 168) { /// 168h = 7 dias
+		if (checkinCheckoutDifference <= 24)
+			return 70;
+		else if ( checkinCheckoutDifference < 168) { /// 168h = 7 dias
 			return 70 + 50*((checkinCheckoutDifference / 24) - 1);
 		} 
 		else if (checkinCheckoutDifference > 168 && checkinCheckoutDifference <= 336) {  /// 336h = 14 dias
 			return 70 + 50*(6) + 30*((checkinCheckoutDifference-168) / 24);	
-		} else { /// 720h = 30 dias
+		} else{ /// 720h = 30 dias
 			return 70 + 50*(6) + 30*((checkinCheckoutDifference-168) / 24) + 500 *(checkinCheckoutDifference / 720);		
 		}
 	}
@@ -82,6 +84,9 @@ public class Calculator {
 		String checkoutdate = diaCheckout + "/" + mesCheckout + "/" + anoCheckout + " " + horaCheckout + ":"
 				+ minutoCheckout;
 		Date parsedcheckout = fmt.parse(checkoutdate);
+		
+		System.err.println(parsedcheckin +" / " + parsedcheckout);
+		
 		
 		long diff = parsedcheckout.getTime() - parsedcheckin.getTime();
 		
