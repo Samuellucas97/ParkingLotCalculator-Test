@@ -96,7 +96,7 @@ public class CalculatorTestExceptional {
 		Calculator calculator = new Calculator();
 
 		// / Ação
-		Float result = calculator.calculateParkingCost(checkin, checkout, type);
+		int result = calculator.calculateParkingCost(checkin, checkout, type);
 
 		// / Verificação
 		assertEquals("", result);

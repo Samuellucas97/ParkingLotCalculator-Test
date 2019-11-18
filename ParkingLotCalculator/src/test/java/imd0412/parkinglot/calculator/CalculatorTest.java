@@ -31,7 +31,7 @@ public class CalculatorTest {
 	public ParkingLotType type;
 
 	@Parameter(3)
-	public Float expectedParkingCost;
+	public int expectedParkingCost;
 
 	@Parameter(4)
 	public String nameTestCase;
@@ -48,17 +48,17 @@ public class CalculatorTest {
 	public static Collection<Object[]> buildData() {
 		return Arrays.asList(new Object[][] {
 
-		{ "2017.11.30 10:30", "2017.11.30 11:00", ParkingLotType.ShortTerm,(float) 8, "Regra 22" },
-				{ "2017.11.30 09:30", "2017.11.30 11:00", ParkingLotType.ShortTerm,(float) 10, "Regra 23" },
-				{ "2017.11.25 09:30", "2017.11.29 11:00", ParkingLotType.ShortTerm,(float) 402, "Regra 24" },
-				{ "2017.11.20 09:30", "2017.11.29 11:00", ParkingLotType.ShortTerm,(float) 852, "Regra 25" },
-				{ "2017.11.30 10:30", "2017.11.30 11:30", ParkingLotType.LongTerm,(float) 70, "Regra 26" },
-				{ "2017.11.25 09:30", "2017.11.29 11:00", ParkingLotType.LongTerm, (float)220, "Regra 27" },
-				{ "2017.11.20 09:30", "2017.11.29 11:00", ParkingLotType.LongTerm,(float) 430, "Regra 28" },
-				{ "2017.11.20 09:30", "2017.12.26 11:00", ParkingLotType.LongTerm,(float) 1550, "Regra 29" },
-				{ "2017.11.25 09:30", "2017.11.29 11:00", ParkingLotType.VIP,(float) 500, "Regra 30" },
-				{ "2017.11.10 09:30", "2017.11.23 11:00", ParkingLotType.VIP,(float) 1100, "Regra 31" },
-				{ "2017.11.10 09:30", "2017.11.29 11:00", ParkingLotType.VIP,(float) 1600, "Regra 32" }
+		{ "2017.11.30 10:30", "2017.11.30 11:00", ParkingLotType.ShortTerm, 8, "Regra 22" },
+				{ "2017.11.30 09:30", "2017.11.30 11:00", ParkingLotType.ShortTerm, 10, "Regra 23" },
+				{ "2017.11.25 09:30", "2017.11.29 11:00", ParkingLotType.ShortTerm, 402, "Regra 24" },
+				{ "2017.11.20 09:30", "2017.11.29 11:00", ParkingLotType.ShortTerm, 852, "Regra 25" },
+				{ "2017.11.30 10:30", "2017.11.30 11:30", ParkingLotType.LongTerm, 70, "Regra 26" },
+				{ "2017.11.25 09:30", "2017.11.29 11:00", ParkingLotType.LongTerm, 220, "Regra 27" },
+				{ "2017.11.20 09:30", "2017.11.29 11:00", ParkingLotType.LongTerm, 430, "Regra 28" },
+				{ "2017.11.20 09:30", "2017.12.26 11:00", ParkingLotType.LongTerm, 1740, "Regra 29" },
+				{ "2017.11.25 09:30", "2017.11.29 11:00", ParkingLotType.VIP, 500, "Regra 30" },
+				{ "2017.11.10 09:30", "2017.11.23 11:00", ParkingLotType.VIP, 1100, "Regra 31" },
+				{ "2017.11.10 09:30", "2017.11.29 11:00", ParkingLotType.VIP, 1600, "Regra 32" }
 
 		});
 	}
@@ -68,7 +68,7 @@ public class CalculatorTest {
 
 		// / Ação
 
-		Float producedParkingCost = calculator.calculateParkingCost(checkin, checkout, type);
+		int producedParkingCost = calculator.calculateParkingCost(checkin, checkout, type);
 
 		// / Verificação
 

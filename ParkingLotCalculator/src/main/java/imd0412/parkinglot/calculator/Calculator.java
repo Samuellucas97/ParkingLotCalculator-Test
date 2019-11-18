@@ -25,10 +25,10 @@ public class Calculator {
 	 * @throws InvalidDataException
 	 * @throws ParseException
 	 */
-	Float calculateParkingCost(String checkin, String checkout, ParkingLotType type) throws DateFormatException,
+	int calculateParkingCost(String checkin, String checkout, ParkingLotType type) throws DateFormatException,
 			InvalidDataException, ParseException {
 
-		float result = 0;
+		int result = 0;
 
 		checkingDateFormat(checkin);
 
@@ -37,32 +37,58 @@ public class Calculator {
 		checkingInvalidData(checkin, checkout);
 
 		int checkinCheckoutDifference = calculateCheckinCheckoutDifferenceInHours(checkin, checkout);
-		
+
 		if (type == ParkingLotType.VIP) {
 			result = calculateVIP(checkinCheckoutDifference);
 		}
 
-		if ( type == ParkingLotType.LongTerm) {
+		else if (type == ParkingLotType.LongTerm) {
 			result = calculateLongoPrazo(checkinCheckoutDifference);
 		}
-	
+
+		else if (type == ParkingLotType.ShortTerm) {
+			result = calculateCurtoPrazo(checkinCheckoutDifference);
+		}
+
 		return result;
 	}
 
-	private float calculateVIP(int checkinCheckoutDifference) {
-		return 500 + 100*((checkinCheckoutDifference - 168)/24) + 80*((checkinCheckoutDifference - 336)/24);
+	private int calculateCurtoPrazo(int checkinCheckoutDifference) {
+		if (checkinCheckoutDifference <= 1) {
+			return 8;
+		} else if ((checkinCheckoutDifference <= 24) && (checkinCheckoutDifference > 1)) {
+			return 8 + 2 * (checkinCheckoutDifference - 1);
+		} else if ((checkinCheckoutDifference > 24) && (checkinCheckoutDifference <= 168)) {
+			return 8 + 2 * (checkinCheckoutDifference - 1) + 50 * (checkinCheckoutDifference / 24);
+		} else {
+			return 8 + 2 * (checkinCheckoutDifference - 1) + (50 * 7) + 30 * ((checkinCheckoutDifference - 168) / 24);
+		}
 	}
-	
-	private float calculateLongoPrazo(int checkinCheckoutDifference) {
-		if (checkinCheckoutDifference <= 24)
+
+	private int calculateVIP(int checkinCheckoutDifference) {
+		if (checkinCheckoutDifference <= 168) {
+			return 500;
+		} else if (checkinCheckoutDifference > 168 && checkinCheckoutDifference <= 336) {
+			return 500 + 100 * ((checkinCheckoutDifference - 168) / 24);
+		} else {
+			return 500 + 100 * 7 + 80 * ((checkinCheckoutDifference - 336) / 24);
+		}
+
+	}
+
+	private int calculateLongoPrazo(int checkinCheckoutDifference) {
+		if (checkinCheckoutDifference <= 24) {
 			return 70;
-		else if ( checkinCheckoutDifference < 168) { /// 168h = 7 dias
-			return 70 + 50*((checkinCheckoutDifference / 24) - 1);
-		} 
-		else if (checkinCheckoutDifference > 168 && checkinCheckoutDifference <= 336) {  /// 336h = 14 dias
-			return 70 + 50*(6) + 30*((checkinCheckoutDifference-168) / 24);	
-		} else{ /// 720h = 30 dias
-			return 70 + 50*(6) + 30*((checkinCheckoutDifference-168) / 24) + 500 *(checkinCheckoutDifference / 720);		
+
+		} else if (checkinCheckoutDifference <= 168 && checkinCheckoutDifference > 24) {
+			// 168h = 7 dias
+			return 70 + 50 * ((checkinCheckoutDifference / 24) - 1);
+		} else if (checkinCheckoutDifference > 168 && checkinCheckoutDifference < 720) {
+			// 336h=14 dias
+			return 70 + 50 * (6) + 30 * ((checkinCheckoutDifference - 168) / 24);
+		} else { // / 720h = 30 dias
+			return 70 + 50 * (6) + 30 * ((checkinCheckoutDifference - 168) / 24) + 500
+					* (checkinCheckoutDifference / 720);
 		}
 	}
 
@@ -84,27 +110,17 @@ public class Calculator {
 		String checkoutdate = diaCheckout + "/" + mesCheckout + "/" + anoCheckout + " " + horaCheckout + ":"
 				+ minutoCheckout;
 		Date parsedcheckout = fmt.parse(checkoutdate);
-		
-		System.err.println(parsedcheckin +" / " + parsedcheckout);
-		
-		
+
 		long diff = parsedcheckout.getTime() - parsedcheckin.getTime();
-		
-		
-		int diffHours = (int) diff/(60*60*1000);
-		
-		int diffMinutes = (int)(diff / (60 * 1000));
-		
-		
+
+		int diffHours = (int) (diff / (60 * 60 * 1000));
+
+		int diffMinutes = (int) (diff / (60 * 1000));
+
 		if ((diffMinutes % 60) > 0) {
 			diffHours++;
 		}
-
-
-		System.out.println(diffHours +" horas");
-
-		
-		return (int) diffHours;
+		return diffHours;
 	}
 
 	private void checkingDateFormat(String checkin_checkout) throws DateFormatException {
