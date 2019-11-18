@@ -37,17 +37,31 @@ public class Calculator {
 		checkingInvalidData(checkin, checkout);
 
 		int checkinCheckoutDifference = calculateCheckinCheckoutDifferenceInHours(checkin, checkout);
-
+		
 		if (type == ParkingLotType.VIP) {
 			result = calculateVIP(checkinCheckoutDifference);
 		}
 
+		if ( type == ParkingLotType.LongTerm) {
+			result = calculateLongoPrazo(checkinCheckoutDifference);
+		}
+	
 		return result;
 	}
 
 	private float calculateVIP(int checkinCheckoutDifference) {
-		// TODO Auto-generated method stub
-		return 0;
+		return 500 + 100*((checkinCheckoutDifference - 168)/24) + 80*((checkinCheckoutDifference - 336)/24);
+	}
+	
+	private float calculateLongoPrazo(int checkinCheckoutDifference) {
+		if ( checkinCheckoutDifference <= 168) { /// 168h = 7 dias
+			return 70 + 50*((checkinCheckoutDifference / 24) - 1);
+		} 
+		else if (checkinCheckoutDifference > 168 && checkinCheckoutDifference <= 336) {  /// 336h = 14 dias
+			return 70 + 50*(6) + 30*((checkinCheckoutDifference-168) / 24);	
+		} else { /// 720h = 30 dias
+			return 70 + 50*(6) + 30*((checkinCheckoutDifference-168) / 24) + 500 *(checkinCheckoutDifference / 720);		
+		}
 	}
 
 	private int calculateCheckinCheckoutDifferenceInHours(String checkin, String checkout) throws ParseException {
@@ -68,13 +82,23 @@ public class Calculator {
 		String checkoutdate = diaCheckout + "/" + mesCheckout + "/" + anoCheckout + " " + horaCheckout + ":"
 				+ minutoCheckout;
 		Date parsedcheckout = fmt.parse(checkoutdate);
-
+		
 		long diff = parsedcheckout.getTime() - parsedcheckin.getTime();
-		long diffMinutes = diff / (60 * 1000) % 60;
-		long diffHours = (diffMinutes / 60);
+		
+		
+		int diffHours = (int) diff/(60*60*1000);
+		
+		int diffMinutes = (int)(diff / (60 * 1000));
+		
+		
 		if ((diffMinutes % 60) > 0) {
 			diffHours++;
 		}
+
+
+		System.out.println(diffHours +" horas");
+
+		
 		return (int) diffHours;
 	}
 
