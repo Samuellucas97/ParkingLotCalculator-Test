@@ -63,7 +63,7 @@ public class CalculatorTestExceptional {
 	public ExpectedException exceptionalExpectation = ExpectedException.none();
 	
 	@Test
-	public void testShouldCalculaterParkingCostExceptional() {
+	public void testShouldCalculaterParkingCostExceptional() throws DateFormatException {
 		
 		/// Configuração
 		

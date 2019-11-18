@@ -3,6 +3,7 @@ package imd0412.parkinglot.calculator;
 import imd0412.parkinglot.ParkingLotType;
 import imd0412.parkinglot.exception.DateFormatException;
 import imd0412.parkinglot.exception.InvalidDataException;
+import imd0412.parkinglot.exception.InvalidDataType;
 
 public class Calculator {
 	/**
@@ -17,20 +18,33 @@ public class Calculator {
 	 * @param type
 	 * @return
 	 * @throws DateFormatException 
+	 * @throws InvalidDataException 
 	 */
 	Float calculateParkingCost(String checkin, String checkout,
-			ParkingLotType type) throws DateFormatException {
+			ParkingLotType type) throws DateFormatException, InvalidDataException {
 
-		checkingFormat(checkin);
+		checkingDateFormat(checkin);
 		
-		checkingFormat(checkout);
+		checkingDateFormat(checkout);
 		
 		
+		checkingInvalidData(checkin, checkout);
 		
 		return null;
 	}
 	
-	private void checkingFormat(String checkin_checkout) throws DateFormatException {
+	private void checkingDateFormatCheckinCheckout(String checkin, String checkout) throws DateFormatException { 
+		
+	checkingDateFormat(checkin);
+		
+		checkingDateFormat(checkout);
+		
+		
+	}
+		
+	
+	
+	private void checkingDateFormat(String checkin_checkout) throws DateFormatException {
 		
 		if (checkin_checkout.length() != 16)
 			throw new DateFormatException("Tamanho inválido");
@@ -54,13 +68,13 @@ public class Calculator {
 			throw new DateFormatException();
 	}
 	
-	private void s(String checkin_checkout) {
+	private void checkingInvalidData(String checkin, String checkout) throws InvalidDataException {
 
-		int anoCheckin =Integer.parseInt(checkin_checkout);
-		int mesCheckin =Integer.parseInt(checkin_checkout);
-		int diaCheckin = Integer.parseInt(checkin_checkout);
-		int horaCheckin =Integer.parseInt(checkin_checkout);
-		int minutoCheckin =Integer.parseInt(checkin_checkout);
+		int anoCheckin =Integer.parseInt(checkin);
+		int mesCheckin =Integer.parseInt(checkin);
+		int diaCheckin = Integer.parseInt(checkin);
+		int horaCheckin =Integer.parseInt(checkin);
+		int minutoCheckin =Integer.parseInt(checkin);
 		
 		int anoCheckout = Integer.parseInt(checkout);
 		int mesCheckout =Integer.parseInt(checkout);
@@ -68,48 +82,59 @@ public class Calculator {
 		int horaCheckout =Integer.parseInt(checkout);
 		int minutoCheckout = Integer.parseInt(checkout);
 		
-	}
+		checkAnoCheckin(anoCheckin);
+		checkAnoCheckout(anoCheckout);
+		
+		checkMesCheckinCheckout(mesCheckin);
+		checkMesCheckinCheckout(mesCheckout);
+		
+		checkDiaCheckinCheckout(diaCheckin);
+		checkDiaCheckinCheckout(diaCheckout);
+		
+		checkHoraCheckinCheckout(horaCheckin);
+		checkHoraCheckinCheckout(horaCheckout);
 	
-	private void checkAnoCheckinCheckout(int anoCheckinCheckout) throws InvalidDataException {
-		if (anoCheckinCheckout < 1970)
-			throw new InvalidDataException("");
+		checkMinutoCheckinCheckout(minutoCheckin);
+		checkMinutoCheckinCheckout(minutoCheckout);
+		
 	}
 	
 	
 	private void checkAnoCheckin(int anoCheckin) throws InvalidDataException  {
 		
-		checkAnoCheckinCheckout(anoCheckin);
+		if (anoCheckin < 1970)
+			throw new InvalidDataException(InvalidDataType.InvalidYear);
 		
 		if (anoCheckin > 2018)
-			throw new InvalidDataException("");
+			throw new InvalidDataException(InvalidDataType.InvalidYear);
 	}
 	
 	private void checkAnoCheckout(int anoCheckout) throws InvalidDataException {
-		
-		checkAnoCheckinCheckout(anoCheckout);
+		if (anoCheckout < 1970)
+			throw new InvalidDataException(InvalidDataType.InvalidYear);
 		
 		if (anoCheckout > 2019)
-			throw new InvalidDataException("");
+			throw new InvalidDataException(InvalidDataType.InvalidYear);
 	}
 	
 	private void checkMesCheckinCheckout(int mesCheckinCheckout) throws InvalidDataException {
 		if (mesCheckinCheckout > 12)
-			throw new InvalidDataException("");
+			throw new InvalidDataException(InvalidDataType.InvalidMonth);
 	}
 	
 	private void checkDiaCheckinCheckout(int diaCheckinCheckout) throws InvalidDataException {
 		if (diaCheckinCheckout > 31)
-			throw new InvalidDataException();
+			throw new InvalidDataException(InvalidDataType.InvalidDay);
 	}
 	
 	private void checkHoraCheckinCheckout(int horaCheckinCheckout) throws InvalidDataException {
 		if (horaCheckinCheckout > 23)
-			throw new InvalidDataException("");
+			throw new InvalidDataException(InvalidDataType.InvalidHour);
 	}
 	
 	private void checkMinutoCheckinCheckout(int minutoCheckinCheckout) throws InvalidDataException {
 		if (minutoCheckinCheckout > 59)
-			throw new InvalidDataException("");
+			throw new InvalidDataException(InvalidDataType.InvalidMinute);
 	}
 }
 

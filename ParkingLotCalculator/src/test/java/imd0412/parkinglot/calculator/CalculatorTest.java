@@ -66,7 +66,7 @@ public class CalculatorTest {
 	}
 	
 	@Test
-	public void testShouldCalculaterParkingCost() {
+	public void testShouldCalculaterParkingCost() throws DateFormatException {
 		
 		/// Ação
 		
