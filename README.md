@@ -18,7 +18,7 @@ You need the following programs to use this repository:
 
 ## Project requirements
 
-Basically it was used the partitioning techniques in equivalence classes, decision table, among others. Therefore, for more information, read the file `requirements.pdf`.
+Basically it was used the partitioning techniques in equivalence classes, decision table, among others. Therefore, for more information, read the file `requirements.pdf` (in Portuguese). In addition, there is also a report (in Portuguese) in the archive `report.pdf`.
 
 
 ## Authors 
