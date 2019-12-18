@@ -18,7 +18,7 @@ You need the following programs to use this repository:
 
 ## Project requirements
 
-Basically it was used the partitioning techniques in equivalence classes, decision table, among others. Therefore, for more information, read the file kk.pdf
+Basically it was used the partitioning techniques in equivalence classes, decision table, among others. Therefore, for more information, read the file `requirements.pdf`.
 
 
 ## Authors 
